@@ -914,8 +914,18 @@ class Example(QMainWindow, Ui_MainWindow):
             # self.modalWindowDownloading.close()
             # print('На странице: ' + str(self.loading_image))
             if self.loading_image[0].size().width() <=0:
-                print('CHECK PROXY SERVER')
+                if self.DEBUG:
+                    print('Error internet connection')
+                # QMessageBox.critical(window, 'Error','Error internet connection')
+                self.splash.close()
+                msgBox = QMessageBox(
+                    QMessageBox.Critical,
+                'Error',
+                'Check internet connection',
+                QMessageBox.NoButton)
+                msgBox.exec_()
                 self.first_run = 0
+                return None
 
         self.splash.close()
 
